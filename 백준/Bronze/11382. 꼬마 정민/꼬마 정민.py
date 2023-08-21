@@ -1,0 +1,6 @@
+temp = input()
+sp=temp.split(" ")
+a=int(sp[0])
+b=int(sp[1])
+c=int(sp[2])
+print(a+b+c)
