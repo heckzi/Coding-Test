@@ -1,27 +1,20 @@
 n=int(input())
-line=int(input())
-
-def dfs(graph,node,visited):
-    visited[node]= True
-    # print(node,end=' ')
-    for i in graph[node]:
-        if not visited[i]:
-            dfs(graph,i,visited)
-
+l=int(input())
 graph=[[]for _ in range(n)]
-for i in range(line):
+for _ in range(l):
     a,b=map(int,input().split())
-    graph[a-1].append(b-1)
-    graph[b-1].append(a-1)
-    set(graph[a-1])
-    set(graph[b-1])
+    if b-1 not in graph[a-1]:
+        graph[a-1].append(b-1)
+    if a-1 not in graph[b-1]:
+        graph[b-1].append(a-1)
+
+def dfs(n,graph,visited):
+    visited[n]=True
+    for i in graph[n]:
+        if not visited[i]:
+            dfs(i,graph,visited)
 
 visited=[False]*n
-
-dfs(graph,0,visited)
-cnt=0
-for v in visited:
-    if v==True:
-        cnt+=1
-
-print(cnt-1)
+dfs(0,graph,visited)
+# print(visited)
+print(sum(visited)-1)
